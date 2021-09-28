@@ -1,8 +1,13 @@
 function stringReverse(str) {
   var charList = str.split("");
   var reversedList = charList.reverse();
-  reversedList.join("");
-  return reversedList;
+  var joinList = reversedList.join("");
+  return joinList;
 }
 
-console.log(stringReverse("hello"));
+function isPalindrome(str) {
+  var reverseList = stringReverse(str);
+  return str === reverseList;
+}
+
+console.log(isPalindrome("lool"));
