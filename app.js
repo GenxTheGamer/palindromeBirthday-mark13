@@ -13,7 +13,11 @@ function isPalindrome(str) {
 // console.log(isPalindrome("lool"));
 
 function dateFromNumberToString(date) {
-  var dateStr = { day: "", month: "", year: "" };
+  var dateStr = {
+    day: "",
+    month: "",
+    year: "",
+  };
 
   if (date.day < 10) {
     dateStr.day = "0" + date.day;
@@ -48,13 +52,15 @@ function dateFormats(date) {
 
 function checkPalindromeForDateFormats(date) {
   var listOfDates = dateFormats(date);
-  var palindromeFormatDateList = [];
+  flag = false;
 
   for (let i = 0; i < listOfDates.length; i++) {
-    var checkFormatPalindrome = isPalindrome(listOfDates[i]);
-    palindromeFormatDateList.push(checkFormatPalindrome);
+    if (isPalindrome(listOfDates[i])) {
+      flag = true;
+      break;
+    }
   }
-  return palindromeFormatDateList;
+  return flag;
 }
 
 function checkLeapYear(year) {
@@ -70,18 +76,70 @@ function checkLeapYear(year) {
   return false;
 }
 
-function nextPalindromeDate(date) {
-  const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+function getNextDate(date) {
   var day = date.day + 1;
   var month = date.month;
   var year = date.year;
+
+  const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (month === 2) {
+    //Month is febuary
+    if (checkLeapYear(year)) {
+      //Checking leapyear using above checkLeapYear()
+      if (day > 29) {
+        //If Day is greater than 29 then make day = one and go to next month;
+        day = 1;
+        month++;
+      }
+    } else {
+      if (day > 28) {
+        //If day is greater than 28 then and not leap year then day = 1 of next month;
+        day = 1;
+        month++;
+      }
+    }
+  } else {
+    if (day > monthDaysArray[month - 1]) {
+      //If day is greater than the days given in the monthDayArray then day = 1 of next month;
+      day = 1;
+      month++;
+    }
+  }
+
+  if (month > 12) {
+    //If month is greater than 12 (suppose its 31th dec) then month is 1st which is january and year is incremented.
+    month = 1;
+    year++;
+  }
+
+  return {
+    day: day,
+    month: month,
+    year: year,
+  };
+}
+
+function checkNextPalindromeDate(date) {
+  let dayCount = 0;
+  var nextDate = getNextDate(date);
+
+  while (1) {
+    dayCount++;
+    var isPalindrome = checkPalindromeForDateFormats(nextDate);
+    if (isPalindrome) {
+      break;
+    }
+    nextDate = getNextDate(nextDate);
+  }
+
+  return [dayCount, nextDate];
 }
 
 var date = {
-  day: 20,
-  month: 2,
-  year: 2020,
+  day: 8,
+  month: 8,
+  year: 2021,
 };
 
-console.log(checkPalindromeForDateFormats(date));
+console.log(checkNextPalindromeDate(date));
