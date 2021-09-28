@@ -136,10 +136,36 @@ function checkNextPalindromeDate(date) {
   return [dayCount, nextDate];
 }
 
-var date = {
-  day: 8,
-  month: 8,
-  year: 2021,
-};
+// var date = {
+//   day: 8,
+//   month: 8,
+//   year: 2021,
+// };
 
-console.log(checkNextPalindromeDate(date));
+// console.log(checkNextPalindromeDate(date));
+
+const inputBirthday = document.querySelector("#input-birthday");
+const buttonResult = document.querySelector("#button-check");
+const output = document.querySelector("#output");
+
+function clickHandler() {
+  var bdayString = inputBirthday.value;
+  if (bdayString !== "") {
+    var listOfDate = bdayString.split("-");
+    var date = {
+      day: Number(listOfDate[2]),
+      month: Number(listOfDate[1]),
+      year: Number(listOfDate[0]),
+    };
+
+    var isPalindrome = checkPalindromeForDateFormats(date);
+    if (isPalindrome) {
+      output.innerText = "WOOO HOOO !!!! Your Birthday is Palindrome 🎉🎉🎉🎉";
+    } else {
+      var [dayCount, nextDate] = checkNextPalindromeDate(date);
+      output.innerText = `Your Birthday was not palindrome 😔 .The Next Palindrome Date is ${nextDate.day}-${nextDate.month}-${nextDate.year}, you missed by ${dayCount} days`;
+    }
+  }
+}
+
+buttonResult.addEventListener("click", clickHandler);
