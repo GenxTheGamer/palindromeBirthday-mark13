@@ -44,10 +44,23 @@ function dateFormats(date) {
   return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd];
 }
 
+// console.log(dateFormats(date));
+
+function checkPalindromeForDateFormats(date) {
+  var listOfDates = dateFormats(date);
+  var palindromeFormatDateList = [];
+
+  for (let i = 0; i < listOfDates.length; i++) {
+    var checkFormatPalindrome = isPalindrome(listOfDates[i]);
+    palindromeFormatDateList.push(checkFormatPalindrome);
+  }
+  return palindromeFormatDateList;
+}
+
 var date = {
-  day: 10,
-  month: 02,
-  year: 2021,
+  day: 20,
+  month: 2,
+  year: 2020,
 };
 
-console.log(dateFormats(date));
+console.log(checkPalindromeForDateFormats(date));
