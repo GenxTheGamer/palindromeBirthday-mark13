@@ -32,9 +32,22 @@ function dateFromNumberToString(date) {
   return dateStr;
 }
 
+function dateFormats(date) {
+  var dateString = dateFromNumberToString(date);
+  let ddmmyyyy = dateString.day + dateString.month + dateString.year;
+  let mmddyyyy = dateString.month + dateString.day + dateString.year;
+  let yyyymmdd = dateString.year + dateString.month + dateString.day;
+  let ddmmyy = dateString.day + dateString.month + dateString.year.slice(2, 4);
+  let mmddyy = dateString.month + dateString.day + dateString.year.slice(2, 4);
+  let yymmdd = dateString.year.slice(2, 4) + dateString.month + dateString.day;
+
+  return [ddmmyyyy, mmddyyyy, yyyymmdd, ddmmyy, mmddyy, yymmdd];
+}
+
 var date = {
   day: 10,
-  month: 2,
-  year: 2020,
+  month: 02,
+  year: 2021,
 };
-console.log(dateFromNumberToString(date));
+
+console.log(dateFormats(date));
