@@ -1,4 +1,4 @@
-# Palindrome Birthday
+# Palindrome Birthday 🎉
 
 Do you want to check if your birthday is palindrome or not? This app is made for you.
 
