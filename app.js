@@ -57,6 +57,27 @@ function checkPalindromeForDateFormats(date) {
   return palindromeFormatDateList;
 }
 
+function checkLeapYear(year) {
+  if (year % 100 === 0) {
+    return false;
+  }
+  if (year % 4 === 0) {
+    return true;
+  }
+  if (year % 400 === 0) {
+    return true;
+  }
+  return false;
+}
+
+function nextPalindromeDate(date) {
+  const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  var day = date.day + 1;
+  var month = date.month;
+  var year = date.year;
+}
+
 var date = {
   day: 20,
   month: 2,
